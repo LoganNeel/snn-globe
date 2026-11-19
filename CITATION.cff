@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use SNN Globe or its syntax in your work, please cite it. It would mean a lot!"
+title: "SNN Globe: a globe-layout syntax for spiking neural network structure"
+authors:
+  - family-names: "Neel"
+    given-names: "Logan"
+version: 0.1.0
+date-released: 2026-11-18
+license: MIT
+repository-code: "https://github.com/LoganNeel/snn-globe"
