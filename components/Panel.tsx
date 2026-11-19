@@ -1,10 +1,11 @@
 import { useRef } from 'react';
-import { Download, FileCode2, FileText, Upload } from 'lucide-react';
+import { BookOpen, Download, FileCode2, FileText, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
@@ -16,6 +17,7 @@ import { EXAMPLES } from '@/lib/examples';
 import { ACCEPT } from '@/lib/files';
 import type { Layout, UnitNode, ViewEdge } from '@/lib/layout';
 import type { SceneOptions } from '@/lib/scene/GlobeScene';
+import PatternDiagram, { PATTERN_NOTES } from './PatternDiagram';
 import { SITE } from '@/lib/site';
 import { LINE_COLORS, SYM, SYM_DESC, groupColor } from '@/lib/symbols';
 
@@ -65,6 +67,14 @@ export default function Panel(p: Props) {
               className="hidden"
               onChange={e => { const f = e.target.files?.[0]; if (f) p.onOpenFile(f); e.target.value = ''; }}
             />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon-sm" asChild>
+                  <a href="/docs" aria-label="Docs"><BookOpen /></a>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Docs and syntax guide</TooltipContent>
+            </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="ghost" size="icon-sm" onClick={() => fileInput.current?.click()} aria-label="Open file">
@@ -182,15 +192,24 @@ export default function Panel(p: Props) {
             <Heading>Patterns</Heading>
             <div className="grid grid-cols-2 gap-x-2.5 gap-y-0.5">
               {Object.keys(SYM).map(k => (
-                <Tooltip key={k}>
-                  <TooltipTrigger asChild>
-                    <div className="flex cursor-default items-center gap-1.5 text-sm">
+                <HoverCard key={k} openDelay={120} closeDelay={60}>
+                  <HoverCardTrigger asChild>
+                    <div className="-mx-1 flex cursor-default items-center gap-1.5 rounded-sm px-1 text-sm hover:bg-accent">
                       <span className="w-7 text-center">{SYM[k]}</span>
                       <code className="font-mono text-xs text-muted-foreground">{k}</code>
                     </div>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">{SYM_DESC[k]}</TooltipContent>
-                </Tooltip>
+                  </HoverCardTrigger>
+                  <HoverCardContent side="right" align="start" sideOffset={12} className="w-[232px] p-3">
+                    <div className="mb-2 flex items-baseline justify-between gap-2">
+                      <span className="text-sm font-medium">{SYM_DESC[k].split(' (')[0]}</span>
+                      <code className="font-mono text-xs text-muted-foreground">{k}</code>
+                    </div>
+                    <div className="rounded-sm border bg-background p-1">
+                      <PatternDiagram kind={k} />
+                    </div>
+                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{PATTERN_NOTES[k]}</p>
+                  </HoverCardContent>
+                </HoverCard>
               ))}
             </div>
           </section>

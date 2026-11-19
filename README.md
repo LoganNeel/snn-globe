@@ -100,7 +100,9 @@ lib/layout.ts   globe layout
 lib/scene/      three.js drawing
 lib/embed/      the standalone .html viewer
 lib/files.ts    upload and download
-lib/site.ts     your name, email, links
+lib/site.ts     your name, email, links, domain
+lib/seo.ts      titles, descriptions, keywords
+app/docs/       the docs page
 ```
 
 The .html export uses `public/embed.js`. That gets rebuilt whenever you run dev or build, or by hand with `npm run embed`.
