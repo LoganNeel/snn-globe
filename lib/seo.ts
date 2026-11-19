@@ -1,7 +1,8 @@
 import { SITE } from './site';
 
-// placeholder so builds work before a domain is set
-export const BASE_URL = (SITE.siteUrl || 'https://example.com').replace(/\/$/, '');
+// placeholder so builds work before a domain is set; adds https:// if it was left off
+const raw = (SITE.siteUrl || 'https://example.com').trim().replace(/\/+$/, '');
+export const BASE_URL = /^https?:\/\//.test(raw) ? raw : `https://${raw}`;
 
 export const TITLE = 'SNN Globe: 3D Spiking Neural Network Visualizer';
 

@@ -4,7 +4,7 @@ export const SITE = {
   email: 'neel.logan1215@gmail.com',
   authorUrl: 'https://www.linkedin.com/in/logan-neel',
   repoUrl: 'https://github.com/LoganNeel/snn-globe',
-  siteUrl: 'snn-globe.com',
+  siteUrl: 'https://snn-globe.com',
   googleSiteVerification: 'UXjiVHtGhZddFWlx4f4W5uQk5C6yzMl1OV6SI6ke90o',
   license: 'MIT',
   year: 2026,
